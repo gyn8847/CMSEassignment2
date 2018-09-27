@@ -42,7 +42,7 @@
 								</a>
 							</li>
 							<form action="thingsOrIdeas.php">
-	<button type="submit" formaction = "css/image.html" style="margin-bottom: 100px 0px">Upload an image ►</button>
+	<button type="submit" formaction = "image.html" style="margin-bottom: 100px 0px">Upload an image ►</button>
 							</form>
 						</ul>
 					</div>
