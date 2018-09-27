@@ -1,5 +1,5 @@
 {
   "require": {
-    	"heroku/php-sdk",
+    	"csanquer/pdo-service-provider=~1.0"
     }
 }
