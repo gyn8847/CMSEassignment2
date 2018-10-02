@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['Submit1']))
+if(isset($_POST['submitImage']))
 { 
 $filepath = "images/" . $_FILES["file"]["name"];
  
