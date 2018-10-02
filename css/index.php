@@ -41,7 +41,9 @@
 									<span class="total_price">$ 0.00</span>
 								</a>
 							</li>
-	<form action = "image.html" button type="submit" style="margin-bottom: 100px 0px">Upload an image ►</button>
+					<form action="image.html>
+	<formaction = "image.html" button type="submit" style="margin-bottom: 100px 0px">Upload an image ►</button>
+					</form>
 						</ul>
 					</div>
 					
