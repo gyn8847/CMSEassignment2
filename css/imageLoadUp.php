@@ -28,3 +28,7 @@ if(isset($_POST['submitImage']))
 	}
 } 
 ?>
+
+<script>
+	
+</script>
