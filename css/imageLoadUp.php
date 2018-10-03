@@ -32,11 +32,4 @@ if(isset($_POST['submitImage']))
 
 <script>
 import interact from 'interactjs'
-
-interact('.item').draggable({
-  onmove(event) {
-    console.log(event.pageX,
-                event.pageY)
-  }
-})
 </script>
