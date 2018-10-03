@@ -7,7 +7,7 @@
 <form enctype="multipart/form-data" method="post">
 <p>Select image:</p>
 <input type="file" name="file"><br/>
-<input type="button" value="upload" name="submitImage"> <br/>
+<input type="submit" value="upload" name="submitImage"> <br/>
 </form>
  
 </body>
