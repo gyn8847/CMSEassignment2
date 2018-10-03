@@ -9,6 +9,10 @@
 <input type="file" name="file"><br/>
 <input type="submit" value="upload" name="submitImage"> <br/>
 </form>
+	
+<form action="imageDragTree.php">
+	<button type="submit" formaction = "imageDragTree.php" style="margin-bottom: 100px 0px">Upload an image ►</button>
+</form>
  
 </body>
 </html>
