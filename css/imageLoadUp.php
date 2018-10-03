@@ -11,7 +11,7 @@
 </form>
 	
 <form action="imageDragTree.php">
-	<button type="submit" formaction = "imageDragTree.php" style="margin-bottom: 100px 0px">Upload an image ►</button>
+	<button type="submit" formaction = "imageDragTree.php" style="margin-bottom: 100px 0px">Drag a tree ►</button>
 </form>
  
 </body>
