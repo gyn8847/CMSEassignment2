@@ -10,8 +10,8 @@
 <input type="submit" value="upload" name="submitImage"> <br/>
 </form>
 	
-<form action="imageDragTree.php">
-	<button type="submit" formaction = "imageDragTree.php" style="margin-bottom: 100px 0px">Drag a tree ►</button>
+<form action="imageDragTree.html">
+	<button type="submit" formaction = "imageDragTree.html" style="margin-bottom: 100px 0px">Drag a tree ►</button>
 </form>
  
 </body>
