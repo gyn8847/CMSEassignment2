@@ -41,7 +41,7 @@
 									<span class="total_price">$ 0.00</span>
 								</a>
 							</li>
-					<form action="imageLoadUp.html">
+					<form action="imageLoadUp.php">
 	<button type="submit" formaction = "imageLoadUp.html" style="margin-bottom: 100px 0px">Upload an image ►</button>
 							</form>
 						</ul>
