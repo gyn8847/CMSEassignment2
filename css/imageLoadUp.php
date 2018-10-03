@@ -14,6 +14,7 @@
 </html>
 
 <?php
+$ npm install interactjs
 if(isset($_POST['submitImage']))
 { 
 	$filepath = "images/" . $_FILES["file"]["name"];
@@ -30,5 +31,12 @@ if(isset($_POST['submitImage']))
 ?>
 
 <script>
-	
+import interact from 'interactjs'
+
+interact('.item').draggable({
+  onmove(event) {
+    console.log(event.pageX,
+                event.pageY)
+  }
+})
 </script>
