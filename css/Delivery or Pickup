@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<style>
+div.container {
+	margin: auto;
+	width: 30%;
+    border: 2px solid gray;
+	padding: 1px;
+	background-color: beige;
+	font-family: "Times New Roman", Times, serif;
+}
+</style>
+<html>
+<head>
+<title>Delivery or Pickup</title>
+</head>
+<body>
+
+<center><h1>Delivery OR Pickup Choice</h1></center>
+
+<div class = "container">
+<form action = "Payment Form.html" method = "get">
+	<input type = "radio" name = "delivery" value = "delivery">
+	<label><b>Delivery</b></label><br/>
+	<input type = "radio" name = "pickup" value = "pickup">
+	<label><b>Pickup</b></label><br/>
+	<input type = "submit" value = "submit">
+</form>
+</div>
+	
+</body>
+</html>
