@@ -5,11 +5,11 @@
 	<meta charset="UTF-8">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.8/interact.min.js"></script>
     	<style>
-        #drag-1
+        #drag-1, #drag-2
 	{
-        	width: 25%;
-        	height: 100%;
-        	min-height: 6.5em;
+        	width: 200px;
+        	height: 200px;
+        	min-height: 200px;
         	margin: 10%;
         	background-color: #29e;
         	color: white;
