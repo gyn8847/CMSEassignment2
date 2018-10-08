@@ -73,13 +73,13 @@
             // call this function on every dragmove event
             onmove: dragMoveListener,
             // call this function on every dragend event
-            //onend: function (event) {
-            //    console.log('onend');
-            //    var textEl = event.target.querySelector('p');
-            //    textEl && (textEl.textContent =
-            //        'moved a distance of '
-            //        + (Math.sqrt(event.dx * event.dx +
-            //            event.dy * event.dy)|0) + 'px');
+            onend: function (event) {
+                console.log('onend');
+                var textEl = event.target.querySelector('p');
+                textEl && (textEl.textContent =
+                    'moved a distance of '
+                    + (Math.sqrt(event.dx * event.dx +
+                        event.dy * event.dy)|0) + 'px');
             }
         });
     function dragMoveListener (event) {
