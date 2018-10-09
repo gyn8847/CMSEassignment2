@@ -1,7 +1,10 @@
 <?php
 
-//database_connection.php
-
-$connect = new PDO("mysql:host=localhost;dbname=malachi", "malachi", "malachi");
+	$host = "localhost";
+	$dbname = "test";
+	$user = "malachi";
+	$pw = "malachi";
+	
+	$connect = mysqli_connect($host, $user, $pw, $dbname);
 
 ?>

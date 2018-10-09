@@ -1,17 +1,5 @@
-<?php 
-session_start();
-
-// protects the page, redirects to login page if not logged in
-if(!isset($_SESSION['user_id'])) 
-{ 
-	include('login.php');
-	exit();
-}
-
-?>
-
 <?php
-
+session_start();
 $product_ids = array();
 
 //check if add to cart button has been submitted
@@ -133,169 +121,30 @@ if(filter_input(INPUT_GET, "action") == "delete")
 	var dropdown = document.getElementsByClassName("dropdown-btn");
 	var i;
 
-	for (i = 0; i < dropdown.length; i++) 
-	{
-	  dropdown[i].addEventListener("click", function() 
-	  {
+	for (i = 0; i < dropdown.length; i++) {
+	  dropdown[i].addEventListener("click", function() {
 		this.classList.toggle("active");
 		var dropdownContent = this.nextElementSibling;
-		if (dropdownContent.style.display === "block") 
-		{
+		if (dropdownContent.style.display === "block") {
 		  dropdownContent.style.display = "none";
-		} 
-		else 
-		{
+		} else {
 		  dropdownContent.style.display = "block";
 		}
 	  });
 	}
 	</script>
 	
-	<script>
-	function displayTrees() 
-	{
-		var x = document.getElementById("trees");
-		if (x.style.display === "none") 
-		{
-			x.style.display = "block";
-		} 
-		else 
-		{
-			x.style.display = "none";
-		}
-	}
-	
-	function displayPlants() 
-	{
-		var x = document.getElementById("plants");
-		if (x.style.display === "none") 
-		{
-			x.style.display = "block";
-		} 
-		else 
-		{
-			x.style.display = "none";
-		}
-	}
-	
-	</script>
-	
-	
 	
 	<!--Product Catalog-->
 	
-	<button class=""onclick="displayTrees()" style="
-	background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-	margin: 0 auto;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
-	height:auto;
-	width:100%;">Trees</button><br/>
-
-	<div id="trees" style="display:none;">
-	
 	<?php
 	
 	require 'database_connection.php';
 	
-	$query = "SELECT * FROM product WHERE type='tree' ORDER BY id ASC";
-	$result = mysqli_query($connect, $query);
-	if(mysqli_num_rows($result) > 0)
-	{
-		while($product = $result->fetch_assoc())
-		{
-			echo "
-			<div class='col-sm-4 col-md-3' >
-				<form method='post' action='index.php?action=add&id=".$product["id"]."'>
-					<div class='products'>
-						<img src='images/".$product["image"]."' class='img-responsive' />
-						<h4 class='text-info'>".$product["name"]."</h4>
-						<h4>$".$product["price"]."</h4>
-						<input type='number' name='quantity' class='form-control' value='1' min='1' />
-						<input type='hidden' name='name' value='".$product["name"]."' />
-						<input type='hidden' name='price' value='".$product["price"]."' />
-						<input type='submit' name='add_to_cart' class='btn btn-info' style='margin-top:5px;' value='Add to Cart' />
-					</div>
-				</form>
-			</div>
-			";
-		}
-	}
-	?>
-	</div>
-	
-	
-	<!-- End of product catalog -->
-	
-	<button onclick="displayPlants()" style="
-	background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-	margin: 0 auto;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
-	height:auto;
-	width:100%;">Plants</button><br />
-	
-	<div id="plants" style="display:none;">
-	
-	<?php
-	
-	require 'database_connection.php';
-	
-	$query = "SELECT * FROM product WHERE type='plant' ORDER BY id ASC";
-	$result = mysqli_query($connect, $query);
-	if(mysqli_num_rows($result) > 0)
-	{
-		while($product = $result->fetch_assoc())
-		{
-			echo "
-			<div class='col-sm-4 col-md-3' >
-				<form method='post' action='index.php?action=add&id=".$product["id"]."'>
-					<div class='products'>
-						<img src='images/".$product["image"]."' class='img-responsive' />
-						<h4 class='text-info'>".$product["name"]."</h4>
-						<h4>$".$product["price"]."</h4>
-						<input type='number' name='quantity' class='form-control' value='1' min='1' />
-						<input type='hidden' name='name' value='".$product["name"]."' />
-						<input type='hidden' name='price' value='".$product["price"]."' />
-						<input type='submit' name='add_to_cart' class='btn btn-info' style='margin-top:5px;' value='Add to Cart' />
-					</div>
-				</form>
-			</div>
-			";
-		}
-	}
 	?>
 	
-	</div>
-	
-	<div style="clear:both:"></div>
-	
-	<button onclick="displaySupplies()" style="
-	background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-	margin: 0 auto;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
-	height:auto;
-	width:100%;">Garden Supplies</button><br />
-	
-	<div style="clear:both:"></div>
-	
-	<!-- Shopping Cart -->
+	<div style="clear:both:></div>
+	<!--Shopping Cart-->
 	<br />
 	<div class="table-responsive">
 	<table class="table">
@@ -320,7 +169,7 @@ if(filter_input(INPUT_GET, "action") == "delete")
 					<td>$ ".$product["price"]."</td>
 					<td>$ ".$product["quantity"] * $product["price"]."</td>
 					<td>
-						<a href='index.php?action=delete&id=".$product["id"]."'>
+						<a href='cart.php?action=delete&id=".$product["id"]."'>
 							<div class='btn-danger'>Remove</div>
 						</a>
 					</td>
@@ -354,7 +203,6 @@ if(filter_input(INPUT_GET, "action") == "delete")
 			
 			<?php
 		}
-		$connect->close();
 		?>
 	</table>
 	</div>
