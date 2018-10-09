@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {
+	font-family: Times New Roman, Times, serif;
+	font-size: 24px;
+	background-image: url("Tree 2.jpg");
+}
+
+form {
+    border: 2px solid black;
+    font-family: Times New Roman, Times, serif;
+	font-size: 20px;
+}
+
+.container {
+    padding: 10px;
+    background-color: beige;
+}
+
+input[type=text], input[type=submit] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=checkbox] {
+    margin-top: 16px;
+}
+
+input[type=submit] {
+    background-color: #0000ff;
+    color: white;
+    border: none;
+}
+
+input[type=submit]:hover {
+    opacity: 0.6;
+}
+
+h2 {
+	font-color: white; 
+	text-shadow: 4px 4px 6px #000000;
+}
+</style>
+<head>
+<title>Plant A Tree</title>
+</head>
+<body style="font-family: Times New Roman, Times, serif;">
+
+<center><h2><font color = "white" text-shadow: "2px 2px 4px #000000";>Plant A Tree Newsletter</font></h2></center>
+
+<form action="/action_page.php" style="border: 3px solid beige;font-family: Times New Roman;">
+  <div class="container" style="padding: 2px;background-color: beige;">
+    <p><b>Input Email Address</b></p>
+  </div>
+
+  <div class="container" style="background-color: white;padding: 10px;">
+    <input type="text" placeholder="Email Address" name="mail" required style="width: 100%;padding: 10px;margin: 6px 0;display: inline-block;border: 1px solid gray;box-sizing: border-box;">
+    <label>
+      <input type="checkbox" checked="checked" name="subscribe" style="margin-top: 16px;"> Weekly Newsletter
+    </label>
+  </div>
+
+  <div class="container" style="padding: 10px;background-color: beige;">
+    <input type="submit" value="Subscribe" style="width: 20%;padding: 10px;margin: 6px 0;display: inline-block;border: none;box-sizing: border-box;background-color: red;color: white;">
+  </div>
+</form>
+
+</body>
+</html>
