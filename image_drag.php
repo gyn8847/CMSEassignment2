@@ -79,7 +79,7 @@
 	<select name="image_name">
 	<?php
 	
-	require 'database_connection.php';
+	require 'db_connect.php';
 	
 	$query = "SELECT * FROM product";
 	$result = mysqli_query($connect, $query);

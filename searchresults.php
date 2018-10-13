@@ -149,7 +149,7 @@ if(filter_input(INPUT_GET, "action") == "delete")
 	
 	<?php
 	
-	require 'database_connection.php';
+	require 'db_connect.php';
 	
 	$psearch = $_POST["search"];
 	

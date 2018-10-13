@@ -1,82 +1,8 @@
-<?php 
-session_start();
-
-// protects the page, redirects to login page if not logged in
-if(!isset($_SESSION['user_id'])) 
-{ 
-	include('login.php');
-	exit();
-}
-
-?>
-
 <?php
+require 'functions.php';
 
-$product_ids = array();
-
-//check if add to cart button has been submitted
-if(filter_input(INPUT_POST, "add_to_cart"))
-{	
-	//checks if the shopping cart exists
-	if(isset($_SESSION["shopping_cart"]))
-	{
-		//counts how many products are in the shopping cart
-		$count = count($_SESSION["shopping_cart"]);
-		
-		$product_ids = array_column($_SESSION["shopping_cart"], "id");
-		
-		if(!in_array(filter_input(INPUT_GET, "id"), $product_ids))
-		{
-			$_SESSION["shopping_cart"][$count] = array
-			(
-			"id" => filter_input(INPUT_GET, "id"),
-			"name" => filter_input(INPUT_POST, "name"),
-			"price" => filter_input(INPUT_POST, "price"),
-			"quantity" => filter_input(INPUT_POST, "quantity")
-			);
-		}
-		else
-		{
-			//match array key to id of the product being added to the cart
-			for($i = 0; $i < count($product_ids); $i++)
-			{
-				//updates the quanity of the item in the cart
-				if($product_ids[$i] == filter_input(INPUT_GET, "id"))
-				{
-					$_SESSION["shopping_cart"][$i]["quantity"] += filter_input(INPUT_POST, "quantity");
-				}
-			}
-		}
-	}
-	else
-	{
-		//if the shopping cart doesn't exist, then create first product with array key 0
-		//create array using submitted form data, start from key 0 and fill it with values
-		$_SESSION["shopping_cart"]["0"] = array
-		(
-			"id" => filter_input(INPUT_GET, "id"),
-			"name" => filter_input(INPUT_POST, "name"),
-			"price" => filter_input(INPUT_POST, "price"),
-			"quantity" => filter_input(INPUT_POST, "quantity")
-		);
-	}
-}
-
-if(filter_input(INPUT_GET, "action") == "delete")
-{
-	//loop through all the products until you find the product being removed
-	foreach($_SESSION["shopping_cart"] as $key => $product)
-	{
-		if($product["id"] == filter_input(INPUT_GET, "id"))
-		{
-			//removes the product from the shopping cart when it matches with the product id
-			unset($_SESSION["shopping_cart"][$key]);
-		}
-	}
-	//reset the session array keys so they match with $product_ids numeric array
-	$_SESSION["shopping_cart"] = array_values($_SESSION["shopping_cart"]);
-}
-
+//calls the fetchCart() function from the required functions.php file
+echo fetchCart();
 ?>
 
 <!DOCTYPE html>
@@ -117,11 +43,13 @@ if(filter_input(INPUT_GET, "action") == "delete")
 	<hr />
 	
 	<script>
+	//opens the side nav menu
 	function openNav() 
 	{
 		document.getElementById("mySidenav").style.width = "250px";
 	}
 
+	//closes the side nav menu
 	function closeNav() 
 	{
 		document.getElementById("mySidenav").style.width = "0";
@@ -178,6 +106,19 @@ if(filter_input(INPUT_GET, "action") == "delete")
 		}
 	}
 	
+	function displaySupplies() 
+	{
+		var x = document.getElementById("supply");
+		if (x.style.display === "none") 
+		{
+			x.style.display = "block";
+		} 
+		else 
+		{
+			x.style.display = "none";
+		}
+	}
+	
 	</script>
 	
 	
@@ -200,38 +141,12 @@ if(filter_input(INPUT_GET, "action") == "delete")
 	<div id="trees" style="display:none;">
 	
 	<?php
-	
-	require 'database_connection.php';
-	
-	$query = "SELECT * FROM product WHERE type='tree' ORDER BY id ASC";
-	$result = mysqli_query($connect, $query);
-	if(mysqli_num_rows($result) > 0)
-	{
-		while($product = $result->fetch_assoc())
-		{
-			echo "
-			<div class='col-sm-4 col-md-3' >
-				<form method='post' action='index.php?action=add&id=".$product["id"]."'>
-					<div class='products'>
-						<img src='images/".$product["image"]."' class='img-responsive' />
-						<h4 class='text-info'>".$product["name"]."</h4>
-						<h4>$".$product["price"]."</h4>
-						<input type='number' name='quantity' class='form-control' value='1' min='1' />
-						<input type='hidden' name='name' value='".$product["name"]."' />
-						<input type='hidden' name='price' value='".$product["price"]."' />
-						<input type='submit' name='add_to_cart' class='btn btn-info' style='margin-top:5px;' value='Add to Cart' />
-					</div>
-				</form>
-			</div>
-			";
-		}
-	}
+	$prodType = "tree";
+	echo displayProduct($prodType);
 	?>
 	</div>
 	
-	
-	<!-- End of product catalog -->
-	
+	<!--Display the plants from products table-->
 	<button onclick="displayPlants()" style="
 	background-color: #4CAF50; /* Green */
     border: none;
@@ -248,35 +163,12 @@ if(filter_input(INPUT_GET, "action") == "delete")
 	<div id="plants" style="display:none;">
 	
 	<?php
-	
-	require 'database_connection.php';
-	
-	$query = "SELECT * FROM product WHERE type='plant' ORDER BY id ASC";
-	$result = mysqli_query($connect, $query);
-	if(mysqli_num_rows($result) > 0)
-	{
-		while($product = $result->fetch_assoc())
-		{
-			echo "
-			<div class='col-sm-4 col-md-3' >
-				<form method='post' action='index.php?action=add&id=".$product["id"]."'>
-					<div class='products'>
-						<img src='images/".$product["image"]."' class='img-responsive' />
-						<h4 class='text-info'>".$product["name"]."</h4>
-						<h4>$".$product["price"]."</h4>
-						<input type='number' name='quantity' class='form-control' value='1' min='1' />
-						<input type='hidden' name='name' value='".$product["name"]."' />
-						<input type='hidden' name='price' value='".$product["price"]."' />
-						<input type='submit' name='add_to_cart' class='btn btn-info' style='margin-top:5px;' value='Add to Cart' />
-					</div>
-				</form>
-			</div>
-			";
-		}
-	}
+	$prodType = "plant";
+	echo displayProduct($prodType);
 	?>
 	
 	</div>
+	<!--End of display plants-->
 	
 	<div style="clear:both:"></div>
 	
@@ -293,72 +185,26 @@ if(filter_input(INPUT_GET, "action") == "delete")
 	height:auto;
 	width:100%;">Garden Supplies</button><br />
 	
+	<div id="supply" style="display:none;">
+	
+	<?php
+	$prodType = "garden";
+	echo displayProduct($prodType);
+	?>
+	
+	</div>
+	
 	<div style="clear:both:"></div>
+	
+	<!--End of product catalog-->
 	
 	<!-- Shopping Cart -->
 	<br />
-	<div class="table-responsive">
-	<table class="table">
-		<tr><th colspan="5"><h3>Shopping Cart</h3></th></tr>
-		<tr>
-			<th width="40%">Product Name</th>
-			<th width="5%">Quantity</th>
-			<th width="24%">Price</th>
-			<th width="13%">Total</th>
-			<th width="5%">Action</th>
-		</tr>
-		<?php
-		if(!empty($_SESSION["shopping_cart"]))
-		{
-			$total = 0;
-			foreach($_SESSION["shopping_cart"] as $key => $product)
-			{
-				echo "
-				<tr>
-					<td>".$product["name"]."</td>
-					<td>".$product["quantity"]."</td>
-					<td>$ ".$product["price"]."</td>
-					<td>$ ".$product["quantity"] * $product["price"]."</td>
-					<td>
-						<a href='index.php?action=delete&id=".$product["id"]."'>
-							<div class='btn-danger'>Remove</div>
-						</a>
-					</td>
-				</tr>"
-				;
-				
-				$total = $total + ($product["quantity"] * $product["price"]);
-			}
-			echo "
-			<tr>
-				<td colspan='3' align='right'>Total</td>
-				<td align='right'>".$total."</td>
-				<td></td>
-			</tr>
-			";
-			?>
-			
-			<tr>
-				<td colspan='5'>
-					<?php
-						if(isset($_SESSION["shopping_cart"]))
-						{
-							if(count($_SESSION["shopping_cart"]) > 0)
-							{
-								echo "<a href='checkout.php' class='button'>Checkout</a>";
-							}
-						}
-					?>
-				</td>
-			</tr>
-			
-			<?php
-		}
-		$connect->close();
-		?>
-	</table>
-	</div>
-		
+	<?php
+	$pageName = "index.php";
+	//displays the shopping cart on the webpage
+	echo displayCart($pageName);
+	?>
 	</div>
 </body>
 </html>
