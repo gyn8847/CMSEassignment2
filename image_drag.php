@@ -81,7 +81,7 @@
 	
 	require 'db_connect.php';
 	
-	$query = "SELECT * FROM product";
+	$query = "SELECT * FROM product WHERE type='tree'";
 	$result = mysqli_query($connect, $query);
 	if(mysqli_num_rows($result) > 0)
 	{
