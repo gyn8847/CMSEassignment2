@@ -77,6 +77,7 @@
 	<form action="image_drag.php" method="post">
 	<div class="custom-select" style="width:200px;">
 	<select name="image_name">
+	<option>Select Tree</option>
 	<?php
 	
 	require 'db_connect.php';
@@ -85,17 +86,18 @@
 	$result = mysqli_query($connect, $query);
 	if(mysqli_num_rows($result) > 0)
 	{
-		while($product = $result->fetch_assoc())
+		do
 		{
 			echo "<option value='".$product["image"]."'>".$product["name"]."</option>";
 		}
+		while($product = $result->fetch_assoc());
 	}
 		
 	?>
 	</select>
 	</div>
 	<br/>
-	<input type="submit" name="submitBtn" value="Select Tree" style="
+	<input type="submit" name="submitBtn" value="Insert Tree" style="
 	background-color: #4CAF50; /* Green */
     border: none;
     color: white;
