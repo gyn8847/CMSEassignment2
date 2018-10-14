@@ -143,7 +143,9 @@ function displayProduct($prodType)
 {
 	require 'db_connect.php';
 	
-	$query = "SELECT * FROM product WHERE type='".$prodType."' ORDER BY id ASC";
+	$table_name = "`heroku_731729c0756ab4d` . `product`";
+	
+	$query = "SELECT * FROM $table_name WHERE type='$prodType' ORDER BY id ASC";
 	$result = mysqli_query($connect, $query);
 	if(mysqli_num_rows($result) > 0)
 	{

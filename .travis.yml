@@ -1,7 +1,0 @@
-language: php
-deploy:
-  provider: pages
-  skip-cleanup: true
-  keep-history: true
-  on:
-    branch: master

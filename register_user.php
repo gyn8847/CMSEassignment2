@@ -7,7 +7,9 @@ $lname = $_POST["lastname"];
 $email = $_POST["email"];
 $password = $_POST["password"];
 
-$query = "INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`) VALUES (NULL, '$fname', '$lname', '$email', '$password');";
+$table_name = "`heroku_731729c0756ab4d` . `product`";
+
+$query = "INSERT INTO $table_name (`id`, `first_name`, `last_name`, `email`, `password`) VALUES (NULL, '$fname', '$lname', '$email', '$password');";
 $result = $connect->query($query);
 
 ?>
